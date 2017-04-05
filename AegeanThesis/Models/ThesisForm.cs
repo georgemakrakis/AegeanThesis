@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 
 namespace AegeanThesis.Models
 {
@@ -8,14 +9,17 @@ namespace AegeanThesis.Models
         public string Title { get; set; }
         public string Supervisor { get; set; }
 
+        [Display(Name = "Number of Students")]
         [Range(1,3)]
         public string NumStudents { get; set; }
 
         public string Purpose { get; set; }
         public string Description { get; set; }
 
+        [Display(Name = "Prerequested Lessons")]
         public string [] PrereqLessons { get; set; }
 
+        [Display(Name = "Prerequested Knowledge")]
         public string PrereqKnowledge { get; set; }
 
         //Στοιχεία Φοιτητών - Foregin key?
@@ -37,5 +41,11 @@ namespace AegeanThesis.Models
 
         [Range(5, 10)]
         public float Grade { get; set; }
+
+        public bool Assigned { get; set; }
+    }
+    public class ThesisFormBContext : DbContext
+    {
+        public DbSet<ThesisForm> Thesises { get; set; }
     }
 }

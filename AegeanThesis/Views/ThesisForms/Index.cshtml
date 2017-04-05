@@ -1,0 +1,93 @@
+﻿@model IEnumerable<AegeanThesis.Models.ThesisForm>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Supervisor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumStudents)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Purpose)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrereqKnowledge)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AnnouncDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdoptionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FinishDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Grade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Assigned)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Supervisor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumStudents)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Purpose)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrereqKnowledge)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnnouncDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdoptionDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FinishDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Grade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Assigned)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
