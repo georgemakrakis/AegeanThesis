@@ -7,7 +7,7 @@ namespace AegeanThesis.Models
     {
         public int ID { get; set; }
         public string Title { get; set; }
-        public string Supervisor { get; set; }
+        public string Supervisor { get; set; } //Taken from - connected with: User model attribute Name
 
         [Display(Name = "Number of Students")]
         [Range(1,3)]
