@@ -46,7 +46,7 @@ namespace AegeanThesis.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,Supervisor,NumStudents,Purpose,Description,PrereqKnowledge,AnnouncDate,AdoptionDate,FinishDate,Grade,Assigned")] ThesisForm thesisForm)
+        public ActionResult Create([Bind(Include = "ID,Title,Supervisor,NumStudents,Purpose,Description,PrereqKnowledge,StudentInfo,AnnouncDate,AdoptionDate,FinishDate,Grade,Assigned")] ThesisForm thesisForm)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace AegeanThesis.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,Supervisor,NumStudents,Purpose,Description,PrereqKnowledge,AnnouncDate,AdoptionDate,FinishDate,Grade,Assigned")] ThesisForm thesisForm)
+        public ActionResult Edit([Bind(Include = "ID,Title,Supervisor,NumStudents,Purpose,Description,PrereqKnowledge,StudentInfo,AnnouncDate,AdoptionDate,FinishDate,Grade,Assigned")] ThesisForm thesisForm)
         {
             if (ModelState.IsValid)
             {

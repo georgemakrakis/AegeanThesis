@@ -5,15 +5,15 @@ namespace AegeanThesis.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<AegeanThesis.Models.ThesisFormBContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<AegeanThesis.Models.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "AegeanThesis.Models.ThesisFormBContext";
+            ContextKey = "AegeanThesis.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(AegeanThesis.Models.ThesisFormBContext context)
+        protected override void Seed(AegeanThesis.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
