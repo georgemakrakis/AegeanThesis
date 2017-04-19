@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 
 namespace AegeanThesis.Models
@@ -18,7 +17,7 @@ namespace AegeanThesis.Models
         public string Description { get; set; }
 
         [Display(Name = "Prerequested Lessons")]
-        public List<string> PrereqLessons { get; set; }
+        public string PrereqLessons { get; set; }
 
         [Display(Name = "Prerequested Knowledge")]
         public string PrereqKnowledge { get; set; }
@@ -42,7 +41,7 @@ namespace AegeanThesis.Models
         public string FinishDate { get; set; }
 
         [Range(5, 10)]
-        public float Grade { get; set; }
+        public float? Grade { get; set; }
 
         public bool Assigned { get; set; }
     }

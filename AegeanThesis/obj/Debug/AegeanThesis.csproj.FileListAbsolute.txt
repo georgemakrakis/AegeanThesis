@@ -67,8 +67,5 @@ C:\Users\georg\Documents\Visual Studio 2015\Projects\AegeanThesis-master\AegeanT
 C:\Users\georg\Documents\Visual Studio 2015\Projects\AegeanThesis-master\AegeanThesis\obj\Debug\AegeanThesis.csprojResolveAssemblyReference.cache
 C:\Users\georg\Documents\Visual Studio 2015\Projects\AegeanThesis-master\AegeanThesis\obj\Debug\AegeanThesis.dll
 C:\Users\georg\Documents\Visual Studio 2015\Projects\AegeanThesis-master\AegeanThesis\obj\Debug\AegeanThesis.pdb
-C:\Users\georg\Documents\Visual Studio 2015\Projects\AegeanThesis-master\AegeanThesis\obj\Debug\AegeanThesis.Migrations.InitialCreate.resources
+C:\Users\georg\Documents\Visual Studio 2015\Projects\AegeanThesis-master\AegeanThesis\obj\Debug\AegeanThesis.Migrations.ChangeThesisForm.resources
 C:\Users\georg\Documents\Visual Studio 2015\Projects\AegeanThesis-master\AegeanThesis\obj\Debug\AegeanThesis.csproj.GenerateResource.Cache
-C:\Users\georg\Documents\Visual Studio 2015\Projects\AegeanThesis-master\AegeanThesis\obj\Debug\AegeanThesis.Migrations.Initial.resources
-C:\Users\georg\Documents\Visual Studio 2015\Projects\AegeanThesis-master\AegeanThesis\obj\Debug\AegeanThesis.Migrations.StudentsInfo.resources
-C:\Users\georg\Documents\Visual Studio 2015\Projects\AegeanThesis-master\AegeanThesis\obj\Debug\AegeanThesis.Migrations.ChangedRegister.resources

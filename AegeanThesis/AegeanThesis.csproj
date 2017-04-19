@@ -175,21 +175,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Mail\GmailEmailService.cs" />
-    <Compile Include="Migrations\201704051333037_Initial.cs" />
-    <Compile Include="Migrations\201704051333037_Initial.Designer.cs">
-      <DependentUpon>201704051333037_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704051414118_StudentsInfo.cs" />
-    <Compile Include="Migrations\201704051414118_StudentsInfo.Designer.cs">
-      <DependentUpon>201704051414118_StudentsInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704101424552_InitialCreate.cs" />
-    <Compile Include="Migrations\201704101424552_InitialCreate.Designer.cs">
-      <DependentUpon>201704101424552_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704101523307_ChangedRegister.cs" />
-    <Compile Include="Migrations\201704101523307_ChangedRegister.Designer.cs">
-      <DependentUpon>201704101523307_ChangedRegister.cs</DependentUpon>
+    <Compile Include="Migrations\201704191536518_ChangeThesisForm.cs" />
+    <Compile Include="Migrations\201704191536518_ChangeThesisForm.Designer.cs">
+      <DependentUpon>201704191536518_ChangeThesisForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -275,17 +263,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201704051333037_Initial.resx">
-      <DependentUpon>201704051333037_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704051414118_StudentsInfo.resx">
-      <DependentUpon>201704051414118_StudentsInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704101424552_InitialCreate.resx">
-      <DependentUpon>201704101424552_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704101523307_ChangedRegister.resx">
-      <DependentUpon>201704101523307_ChangedRegister.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704191536518_ChangeThesisForm.resx">
+      <DependentUpon>201704191536518_ChangeThesisForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

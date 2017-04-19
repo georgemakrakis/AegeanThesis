@@ -56,6 +56,26 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.PrereqLessons, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @{
+                    List<SelectListItem> listItems = new List<SelectListItem>();
+                    listItems.Add(new SelectListItem
+                    {
+                        Text = "Structed Programming",
+                        Value = "Structed_Programming"
+                    });
+                    listItems.Add(new SelectListItem
+                    {
+                        Text = "Object Oriented Programming",
+                        Value = "Object_Oriented_Programming"
+                    });
+                }
+                @Html.ListBoxFor(model => model.PrereqLessons, listItems, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.PrereqKnowledge, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PrereqKnowledge, new { htmlAttributes = new { @class = "form-control" } })
