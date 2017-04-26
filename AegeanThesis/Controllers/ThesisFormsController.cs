@@ -43,7 +43,8 @@ namespace AegeanThesis.Controllers
                    {
                         new SelectListItem { Value = "Structed Programming", Text = "Structed Programming" },
                         new SelectListItem { Value = "Object Oriented Programming", Text = "Object Oriented Programming" },
-                    }, "Value", "Text")                    
+                    }, "Value", "Text")   
+                                     
                 }
             };
             return View(model);
