@@ -19,6 +19,8 @@ namespace AegeanThesis.Models
         [Display(Name = "Prerequested Lessons")]
         public string PrereqLessons { get; set; }
 
+        public string[] LessonsList { get; set; }
+
         [Display(Name = "Prerequested Knowledge")]
         public string PrereqKnowledge { get; set; }
 

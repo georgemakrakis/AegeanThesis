@@ -181,7 +181,9 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BigViewModelLessonsThesis.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LessonsViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\ThesisForm.cs" />

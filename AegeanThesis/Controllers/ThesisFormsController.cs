@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using AegeanThesis.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using AegeanThesis.Models;
 
 namespace AegeanThesis.Controllers
 {
@@ -14,6 +10,7 @@ namespace AegeanThesis.Controllers
     {
         private ThesisFormBContext db = new ThesisFormBContext();
 
+        private BigViewModelLessonsThesis model=null;
         // GET: ThesisForms
         public ActionResult Index()
         {
@@ -38,7 +35,18 @@ namespace AegeanThesis.Controllers
         // GET: ThesisForms/Create
         public ActionResult Create()
         {
-            return View();
+            model = new BigViewModelLessonsThesis
+            {
+                lessonsViewModel = new LessonsViewModel
+                {
+                   Items = new SelectList(new[]
+                   {
+                        new SelectListItem { Value = "Structed Programming", Text = "Structed Programming" },
+                        new SelectListItem { Value = "Object Oriented Programming", Text = "Object Oriented Programming" },
+                    }, "Value", "Text")                    
+                }
+            };
+            return View(model);
         }
 
         // POST: ThesisForms/Create
@@ -46,10 +54,14 @@ namespace AegeanThesis.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,Supervisor,NumStudents,Purpose,Description,PrereqKnowledge,StudentInfo,AnnouncDate,AdoptionDate,FinishDate,Grade,Assigned")] ThesisForm thesisForm)
+        public ActionResult Create([Bind(Include = "ID,Title,Supervisor,NumStudents,Purpose,Description,LessonsList,PrereqLessons,PrereqKnowledge,StudentInfo,AnnouncDate,AdoptionDate,FinishDate,Grade,Assigned")] ThesisForm thesisForm)
         {
+            
+
             if (ModelState.IsValid)
             {
+              
+                thesisForm.PrereqLessons = string.Join(",",thesisForm.LessonsList);
                 db.Thesises.Add(thesisForm);
                 db.SaveChanges();
                 return RedirectToAction("Index");
