@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Web.Mvc;
 
 namespace AegeanThesis.Models
 {
@@ -20,6 +22,7 @@ namespace AegeanThesis.Models
         public string PrereqLessons { get; set; }
 
         public string[] LessonsList { get; set; }
+        public IEnumerable<SelectListItem> Items { get; set; }
 
         [Display(Name = "Prerequested Knowledge")]
         public string PrereqKnowledge { get; set; }

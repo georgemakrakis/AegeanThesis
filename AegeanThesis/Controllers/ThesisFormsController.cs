@@ -10,7 +10,7 @@ namespace AegeanThesis.Controllers
     {
         private ThesisFormBContext db = new ThesisFormBContext();
 
-        private BigViewModelLessonsThesis model=null;
+        private ThesisForm model=null;
         // GET: ThesisForms
         public ActionResult Index()
         {
@@ -35,18 +35,17 @@ namespace AegeanThesis.Controllers
         // GET: ThesisForms/Create
         public ActionResult Create()
         {
-            model = new BigViewModelLessonsThesis
+
+            model = new ThesisForm
             {
-                lessonsViewModel = new LessonsViewModel
-                {
-                   Items = new SelectList(new[]
-                   {
+                Items = new SelectList(new[]
+               {
                         new SelectListItem { Value = "Structed Programming", Text = "Structed Programming" },
                         new SelectListItem { Value = "Object Oriented Programming", Text = "Object Oriented Programming" },
-                    }, "Value", "Text")   
-                                     
-                }
+                    }, "Value", "Text")
+
             };
+            
             return View(model);
         }
 
@@ -56,9 +55,7 @@ namespace AegeanThesis.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Title,Supervisor,NumStudents,Purpose,Description,LessonsList,PrereqLessons,PrereqKnowledge,StudentInfo,AnnouncDate,AdoptionDate,FinishDate,Grade,Assigned")] ThesisForm thesisForm)
-        {
-            
-
+        {           
             if (ModelState.IsValid)
             {
               
@@ -83,7 +80,16 @@ namespace AegeanThesis.Controllers
             {
                 return HttpNotFound();
             }
-            return View(thesisForm);
+            model = new ThesisForm
+            {
+                Items = new SelectList(new[]
+              {
+                        new SelectListItem { Value = "Structed Programming", Text = "Structed Programming" },
+                        new SelectListItem { Value = "Object Oriented Programming", Text = "Object Oriented Programming" },
+                    }, "Value", "Text")
+
+            };
+            return View(model);
         }
 
         // POST: ThesisForms/Edit/5
@@ -91,10 +97,20 @@ namespace AegeanThesis.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,Supervisor,NumStudents,Purpose,Description,PrereqKnowledge,StudentInfo,AnnouncDate,AdoptionDate,FinishDate,Grade,Assigned")] ThesisForm thesisForm)
+        public ActionResult Edit([Bind(Include = "ID,Title,Supervisor,NumStudents,Purpose,Description,LessonsList,PrereqLessons,PrereqKnowledge,StudentInfo,AnnouncDate,AdoptionDate,FinishDate,Grade,Assigned")] ThesisForm thesisForm)
         {
+            model = new ThesisForm
+            {
+                Items = new SelectList(new[]
+              {
+                        new SelectListItem { Value = "Structed Programming", Text = "Structed Programming" },
+                        new SelectListItem { Value = "Object Oriented Programming", Text = "Object Oriented Programming" },
+                    }, "Value", "Text")
+
+            };
             if (ModelState.IsValid)
             {
+                thesisForm.PrereqLessons = string.Join(",", thesisForm.LessonsList);
                 db.Entry(thesisForm).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
