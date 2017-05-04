@@ -14,6 +14,7 @@ namespace AegeanThesis.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        
 
         public AccountController()
         {
@@ -76,6 +77,9 @@ namespace AegeanThesis.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    var usr = UserManager.FindByEmail(model.Email);
+                    Startup.curr_role = usr.Role;
+                    Startup.curr_user = usr.Name;
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -161,6 +165,9 @@ namespace AegeanThesis.Controllers
                     // TempData["ViewBagLink"] = callbackUrl;
 
                     ViewBag.errorMessage = "Please confirm the email was sent to you.";
+
+                    Startup.curr_role = user.Role;
+                    Startup.curr_user = user.Name;                    
                     return View("ShowMsg");
                 }
                 AddErrors(result);
@@ -401,6 +408,8 @@ namespace AegeanThesis.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            Startup.curr_role = "";
+            Startup.curr_user = "";
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }

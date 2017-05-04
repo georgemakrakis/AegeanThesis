@@ -10,7 +10,8 @@ namespace AegeanThesis.Controllers
     {
         private ThesisFormBContext db = new ThesisFormBContext();
 
-        private ThesisForm model=null;
+        private ThesisForm model = null;
+
         // GET: ThesisForms
         public ActionResult Index()
         {
@@ -35,18 +36,28 @@ namespace AegeanThesis.Controllers
         // GET: ThesisForms/Create
         public ActionResult Create()
         {
-
-            model = new ThesisForm
+            if (Startup.curr_role.Equals("Professor"))
             {
-                Items = new SelectList(new[]
-               {
+
+                model = new ThesisForm
+                {
+                    Items = new SelectList(new[]
+                    {
                         new SelectListItem { Value = "Structed Programming", Text = "Structed Programming" },
                         new SelectListItem { Value = "Object Oriented Programming", Text = "Object Oriented Programming" },
-                    }, "Value", "Text")
+                    }, "Value", "Text"),
+                    //This assignment is used to pass logged in user into DB
+                    Supervisor = Startup.curr_user
 
-            };
-            
-            return View(model);
+
+                };
+
+                return View(model);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
         }
 
         // POST: ThesisForms/Create
@@ -55,11 +66,11 @@ namespace AegeanThesis.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Title,Supervisor,NumStudents,Purpose,Description,LessonsList,PrereqLessons,PrereqKnowledge,StudentInfo,AnnouncDate,AdoptionDate,FinishDate,Grade,Assigned")] ThesisForm thesisForm)
-        {           
+        {
             if (ModelState.IsValid)
             {
-              
-                thesisForm.PrereqLessons = string.Join(",",thesisForm.LessonsList);
+
+                thesisForm.PrereqLessons = string.Join(",", thesisForm.LessonsList);
                 db.Thesises.Add(thesisForm);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -71,6 +82,10 @@ namespace AegeanThesis.Controllers
         // GET: ThesisForms/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!Startup.curr_role.Equals("Professor"))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -83,10 +98,12 @@ namespace AegeanThesis.Controllers
             model = new ThesisForm
             {
                 Items = new SelectList(new[]
-              {
+                {
                         new SelectListItem { Value = "Structed Programming", Text = "Structed Programming" },
                         new SelectListItem { Value = "Object Oriented Programming", Text = "Object Oriented Programming" },
-                    }, "Value", "Text")
+                    }, "Value", "Text"),
+                //This assignment is used to pass logged in user into DB
+                Supervisor = Startup.curr_user
 
             };
             return View(model);
@@ -102,10 +119,12 @@ namespace AegeanThesis.Controllers
             model = new ThesisForm
             {
                 Items = new SelectList(new[]
-              {
+                {
                         new SelectListItem { Value = "Structed Programming", Text = "Structed Programming" },
                         new SelectListItem { Value = "Object Oriented Programming", Text = "Object Oriented Programming" },
-                    }, "Value", "Text")
+                }, "Value", "Text"),
+                //This assignment is used to pass logged in user into DB
+                Supervisor = Startup.curr_user
 
             };
             if (ModelState.IsValid)
