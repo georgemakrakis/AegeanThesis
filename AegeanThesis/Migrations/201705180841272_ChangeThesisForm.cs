@@ -35,6 +35,8 @@ namespace AegeanThesis.Migrations
                         FinishDate = c.String(),
                         Grade = c.Single(),
                         Assigned = c.Boolean(nullable: false),
+                        Approved = c.Boolean(nullable: false),
+                        ReadyPres = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             

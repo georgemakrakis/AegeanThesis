@@ -49,6 +49,11 @@ namespace AegeanThesis.Models
         public float? Grade { get; set; }
 
         public bool Assigned { get; set; }
+
+        public bool Approved { get; set; }
+
+        [Display(Name = "Ready for presentation")]   
+        public bool ReadyPres { get; set; }
     }
     public class ThesisFormBContext : DbContext
     {

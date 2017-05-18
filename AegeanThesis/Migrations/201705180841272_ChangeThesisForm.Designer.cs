@@ -13,7 +13,7 @@ namespace AegeanThesis.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201704191536518_ChangeThesisForm"; }
+            get { return "201705180841272_ChangeThesisForm"; }
         }
         
         string IMigrationMetadata.Source
