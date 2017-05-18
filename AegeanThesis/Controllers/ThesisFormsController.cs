@@ -1,7 +1,9 @@
-﻿using AegeanThesis.Models;
+﻿using AegeanThesis.Mail;
+using AegeanThesis.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web.Mvc;
 
 namespace AegeanThesis.Controllers
@@ -164,23 +166,45 @@ namespace AegeanThesis.Controllers
         }
 
         // GET: ThesisForms/Interested
-        public ActionResult Interested(int? id)
+        public async System.Threading.Tasks.Task<ActionResult> Interested(int? id)
         {
+            ThesisForm thesisForm = db.Thesises.Find(id);
             if (Startup.curr_role.Equals("Professor"))
             {
                 return RedirectToAction("InterestedMessage");
 
             }
+            else if (Startup.curr_role.Equals("Student"))
+            {
+                //This what a mail will contain
+                var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
+                var message = new MailMessage();
+                message.To.Add(new MailAddress(thesisForm.Supervisor+"@aegean.gr")); //replace with valid value
+                message.Subject = "Your email subject";
+                message.From=(new MailAddress("georgemakrakis88@gmail.com"));
+                message.Body = string.Format(body, "AegeanThesis", "georgemakrakis88@gmail.com", "User " + Startup.curr_mail + " is interested about thesis " + thesisForm.Title);
+                message.IsBodyHtml = true;
+                //using the Gmail service used before for user validation
+                using (var smtp = new GmailEmailService())
+                {                               
+                    await smtp.SendMailAsync(message);                    
+                }
+                return RedirectToAction("InterestedSent");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ThesisForm thesisForm = db.Thesises.Find(id);
+
             if (thesisForm == null)
             {
                 return HttpNotFound();
             }
             return View();
+        }
+        public ActionResult InterestedSent()
+        {
+            return View("InterestedSent");
         }
         public ActionResult InterestedMessage()
         {

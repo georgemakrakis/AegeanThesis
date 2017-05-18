@@ -253,6 +253,7 @@
     <Content Include="Views\ThesisForms\Index.cshtml" />
     <Content Include="Views\Account\ShowMsg.cshtml" />
     <Content Include="Views\ThesisForms\InterestedMessage.cshtml" />
+    <Content Include="Views\ThesisForms\InterestedSent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
