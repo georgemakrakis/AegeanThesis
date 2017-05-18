@@ -163,6 +163,36 @@ namespace AegeanThesis.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: ThesisForms/Interested
+        public ActionResult Interested(int? id)
+        {
+            if (Startup.curr_role.Equals("Professor"))
+            {
+                return RedirectToAction("InterestedMessage");
+
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ThesisForm thesisForm = db.Thesises.Find(id);
+            if (thesisForm == null)
+            {
+                return HttpNotFound();
+            }
+            return View();
+        }
+        public ActionResult InterestedMessage()
+        {
+            return View("InterestedMessage");
+        }
+        [HttpPost, ActionName("Interested")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Interested(int id)
+        {            
+            return RedirectToAction("ThesisForm");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
