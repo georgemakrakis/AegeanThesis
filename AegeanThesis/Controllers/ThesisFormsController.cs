@@ -23,7 +23,7 @@ namespace AegeanThesis.Controllers
         // GET: ThesisForms/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (id == null || Startup.curr_user=="")
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -224,6 +224,10 @@ namespace AegeanThesis.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult Chat()
+        {
+            return View();
         }
     }
 }

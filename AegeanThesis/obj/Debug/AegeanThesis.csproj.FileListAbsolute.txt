@@ -140,3 +140,7 @@ C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\o
 C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\obj\Debug\AegeanThesis.pdb
 C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\obj\Debug\AegeanThesis.Migrations.ChangeThesisForm.resources
 C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\obj\Debug\AegeanThesis.csproj.GenerateResource.Cache
+C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
