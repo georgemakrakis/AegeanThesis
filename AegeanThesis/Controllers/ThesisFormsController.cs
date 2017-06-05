@@ -14,6 +14,7 @@ namespace AegeanThesis.Controllers
         private ThesisFormBContext db = new ThesisFormBContext();
 
         private ThesisForm model = null;
+        private MailModel mailmodel = null;
 
         // GET: ThesisForms
         public ActionResult Index()
@@ -230,6 +231,21 @@ namespace AegeanThesis.Controllers
             }
             return new ActionAsPdf("Details", thesisForm);
         }
+        public ActionResult MailPage()
+        {
+            if (Startup.curr_role != "Professor")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            mailmodel = new MailModel
+            {
+                
+                Name = Startup.curr_user,
+                Email = Startup.curr_mail
+
+            };
+            return View("Mail",mailmodel);
+        }        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

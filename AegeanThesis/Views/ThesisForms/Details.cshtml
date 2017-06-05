@@ -135,7 +135,8 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index") |
-    @Html.ActionLink("Print", "Print", new { id = Model.ID })  
+    @Html.ActionLink("Export PDF", "Print", new { id = Model.ID }) |
+    @Html.ActionLink("Send Mail","MailPage")
 </p>
 <div>
     <h2>Chat</h2>
