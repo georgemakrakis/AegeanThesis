@@ -144,3 +144,5 @@ C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\b
 C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
 C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\bin\Microsoft.AspNet.SignalR.Core.xml
 C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\bin\itextsharp.dll
+C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\bin\Rotativa.dll

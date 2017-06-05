@@ -1,5 +1,6 @@
 ﻿using AegeanThesis.Mail;
 using AegeanThesis.Models;
+using Rotativa;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -142,7 +143,7 @@ namespace AegeanThesis.Controllers
         // GET: ThesisForms/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (id == null || Startup.curr_role != "Professor")
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -216,7 +217,19 @@ namespace AegeanThesis.Controllers
         {            
             return RedirectToAction("ThesisForm");
         }
-
+        public ActionResult Print(int? id)
+        {
+            if (id == null || Startup.curr_role != "Professor")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ThesisForm thesisForm = db.Thesises.Find(id);
+            if (thesisForm == null)
+            {
+                return HttpNotFound();
+            }
+            return new ActionAsPdf("Details", thesisForm);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
