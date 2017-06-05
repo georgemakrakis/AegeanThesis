@@ -14,7 +14,7 @@ namespace AegeanThesis.Controllers
         private ThesisFormBContext db = new ThesisFormBContext();
 
         private ThesisForm model = null;
-        private MailModel mailmodel = null;
+        private MailModel mailmodel;
 
         // GET: ThesisForms
         public ActionResult Index()
@@ -237,15 +237,35 @@ namespace AegeanThesis.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            mailmodel = new MailModel
-            {
-                
-                Name = Startup.curr_user,
-                Email = Startup.curr_mail
-
-            };
+            mailmodel = new MailModel();
             return View("Mail",mailmodel);
-        }        
+        }
+
+        /*public ActionResult SendMail()
+        {
+            MailModel model = new MailModel();
+            return View("MailPage",model);
+        }*/
+        
+        [HttpPost, ActionName("SendMailResult")]
+        [ValidateAntiForgeryToken]
+        public async System.Threading.Tasks.Task<ActionResult> SendMailResult(MailModel mailModel)
+        {
+            //This what a mail will contain
+            var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
+            var message = new MailMessage();
+            message.To.Add(new MailAddress(mailModel.Email)); //replace with valid value
+            message.Subject = mailModel.Subject;
+            message.From = (new MailAddress(Startup.curr_mail));
+            message.Body = string.Format(body, "AegeanThesis", Startup.curr_mail, "User " + Startup.curr_user + " is wants approve for thesis " + model.Title,"\n"+mailModel.Message);
+            message.IsBodyHtml = true;
+            //using the Gmail service used before for user validation
+            using (var smtp = new GmailEmailService())
+            {
+                await smtp.SendMailAsync(message);
+            }
+            return RedirectToAction("InterestedSent");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
