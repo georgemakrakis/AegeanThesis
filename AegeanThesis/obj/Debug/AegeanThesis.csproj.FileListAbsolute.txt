@@ -138,11 +138,15 @@ C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\b
 C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\obj\Debug\AegeanThesis.csprojResolveAssemblyReference.cache
 C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\obj\Debug\AegeanThesis.dll
 C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\obj\Debug\AegeanThesis.pdb
-C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\obj\Debug\AegeanThesis.Migrations.ChangeThesisForm.resources
-C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\obj\Debug\AegeanThesis.csproj.GenerateResource.Cache
 C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\bin\Microsoft.AspNet.SignalR.Core.dll
 C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
 C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\bin\Microsoft.AspNet.SignalR.Core.xml
 C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
 C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\bin\itextsharp.dll
 C:\Users\georg\documents\visual studio 2015\Projects\AegeanThesis\AegeanThesis\bin\Rotativa.dll
+C:\Users\georg\Documents\Visual Studio 2015\Projects\AegeanThesis\AegeanThesis\bin\System.Net.Http.Formatting.dll
+C:\Users\georg\Documents\Visual Studio 2015\Projects\AegeanThesis\AegeanThesis\bin\System.Web.Http.dll
+C:\Users\georg\Documents\Visual Studio 2015\Projects\AegeanThesis\AegeanThesis\bin\System.Web.Http.WebHost.dll
+C:\Users\georg\Documents\Visual Studio 2015\Projects\AegeanThesis\AegeanThesis\bin\System.Net.Http.Formatting.xml
+C:\Users\georg\Documents\Visual Studio 2015\Projects\AegeanThesis\AegeanThesis\bin\System.Web.Http.xml
+C:\Users\georg\Documents\Visual Studio 2015\Projects\AegeanThesis\AegeanThesis\bin\System.Web.Http.WebHost.xml

@@ -1,6 +1,7 @@
 ﻿using AegeanThesis.Mail;
 using AegeanThesis.Models;
 using Rotativa;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -11,9 +12,8 @@ namespace AegeanThesis.Controllers
 {
     public class ThesisFormsController : Controller
     {
-        private ThesisFormBContext db = new ThesisFormBContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
-        private ThesisForm model = null;
         private MailModel mailmodel;
 
         // GET: ThesisForms
@@ -25,7 +25,8 @@ namespace AegeanThesis.Controllers
         // GET: ThesisForms/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null || Startup.curr_user=="")
+            var user = Helpers.GetCurrentUser(this.User);
+            if (id == null || user == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -40,18 +41,21 @@ namespace AegeanThesis.Controllers
         // GET: ThesisForms/Create
         public ActionResult Create()
         {
-            if (Startup.curr_role.Equals("Professor"))
+            var user = Helpers.GetCurrentUser(this.User);
+            ThesisForm model = null;
+
+            if (user.Role.Equals("Professor"))
             {
 
                 model = new ThesisForm
                 {
                     Items = new SelectList(new[]
-                    {
+                            {
                         new SelectListItem { Value = "Structed Programming", Text = "Structed Programming" },
                         new SelectListItem { Value = "Object Oriented Programming", Text = "Object Oriented Programming" },
                     }, "Value", "Text"),
                     //This assignment is used to pass logged in user into DB
-                    Supervisor = Startup.curr_user
+                    Supervisor = user.Name,
 
 
                 };
@@ -73,8 +77,8 @@ namespace AegeanThesis.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 thesisForm.PrereqLessons = string.Join(",", thesisForm.LessonsList);
+                thesisForm.Progresses = new System.Collections.Generic.List<ThesisProgress>() { new ThesisProgress { Name = "Announced", StartDate = DateTime.Now.ToShortDateString(), EndDate = DateTime.Now.AddDays(1).ToShortDateString(), Dependencies = "", ProgressPercentage = 100 } };
                 db.Thesises.Add(thesisForm);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,11 +86,21 @@ namespace AegeanThesis.Controllers
 
             return View(thesisForm);
         }
+        /*public ActionResult GetChart(int? id)
+        {
+            using (ApplicationDbContext con = new ApplicationDbContext())
+            {
+                var t = con.Thesises.Find(id);
 
+                return Json(t.Progresses.Select(x => new { x.ID, x.Name, x.StartDate, x.EndDate, x.ProgressPercentage, x.Dependencies }));
+            }
+        }*/
         // GET: ThesisForms/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (!Startup.curr_role.Equals("Professor"))
+            var user = Helpers.GetCurrentUser(this.User);
+
+            if (!user.Role.Equals("Professor"))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
@@ -99,6 +113,8 @@ namespace AegeanThesis.Controllers
             {
                 return HttpNotFound();
             }
+            ThesisForm model = null;
+
             model = new ThesisForm
             {
                 Items = new SelectList(new[]
@@ -107,7 +123,7 @@ namespace AegeanThesis.Controllers
                         new SelectListItem { Value = "Object Oriented Programming", Text = "Object Oriented Programming" },
                     }, "Value", "Text"),
                 //This assignment is used to pass logged in user into DB
-                Supervisor = Startup.curr_user
+                Supervisor = user.Name
 
             };
             return View(model);
@@ -120,6 +136,9 @@ namespace AegeanThesis.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Title,Supervisor,NumStudents,Purpose,Description,LessonsList,PrereqLessons,PrereqKnowledge,StudentInfo,AnnouncDate,AdoptionDate,FinishDate,Grade,Assigned,Approved,ReadyPres")] ThesisForm thesisForm)
         {
+            var user = Helpers.GetCurrentUser(this.User);
+            ThesisForm model = null;
+
             model = new ThesisForm
             {
                 Items = new SelectList(new[]
@@ -128,7 +147,7 @@ namespace AegeanThesis.Controllers
                         new SelectListItem { Value = "Object Oriented Programming", Text = "Object Oriented Programming" },
                 }, "Value", "Text"),
                 //This assignment is used to pass logged in user into DB
-                Supervisor = Startup.curr_user
+                Supervisor = user.Name
 
             };
             if (ModelState.IsValid)
@@ -144,7 +163,9 @@ namespace AegeanThesis.Controllers
         // GET: ThesisForms/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null || Startup.curr_role != "Professor")
+            var user = Helpers.GetCurrentUser(this.User);
+
+            if (id == null || user.Role != "Professor")
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -170,13 +191,15 @@ namespace AegeanThesis.Controllers
         // GET: ThesisForms/Interested
         public async System.Threading.Tasks.Task<ActionResult> Interested(int? id)
         {
+            var user = Helpers.GetCurrentUser(this.User);
+
             ThesisForm thesisForm = db.Thesises.Find(id);
-            if (Startup.curr_role.Equals("Professor"))
+            if (user.Role.Equals("Professor"))
             {
                 return RedirectToAction("InterestedMessage");
 
             }
-            else if (Startup.curr_role.Equals("Student"))
+            else if (user.Role.Equals("Student"))
             {
                 //This what a mail will contain
                 var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
@@ -184,7 +207,7 @@ namespace AegeanThesis.Controllers
                 message.To.Add(new MailAddress(thesisForm.Supervisor+"@aegean.gr")); //replace with valid value
                 message.Subject = "Your email subject";
                 message.From=(new MailAddress("georgemakrakis88@gmail.com"));
-                message.Body = string.Format(body, "AegeanThesis", "georgemakrakis88@gmail.com", "User " + Startup.curr_mail + " is interested about thesis " + thesisForm.Title);
+                message.Body = string.Format(body, "AegeanThesis", "georgemakrakis88@gmail.com", "User " + user.Email + " is interested about thesis " + thesisForm.Title);
                 message.IsBodyHtml = true;
                 //using the Gmail service used before for user validation
                 using (var smtp = new GmailEmailService())
@@ -220,7 +243,9 @@ namespace AegeanThesis.Controllers
         }
         public ActionResult Print(int? id)
         {
-            if (id == null || Startup.curr_role != "Professor")
+            var user = Helpers.GetCurrentUser(this.User);
+
+            if (id == null || user.Role != "Professor")
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -231,12 +256,17 @@ namespace AegeanThesis.Controllers
             }
             return new ActionAsPdf("Details", thesisForm);
         }
-        public ActionResult MailPage()
+
+        public ActionResult MailPage(int? id)
         {
-            if (Startup.curr_role != "Professor")
+            var user = Helpers.GetCurrentUser(this.User);
+
+            if (id == null || user.Role != "Professor")
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            //ThesisTitle = db.Thesises.Find(id).Title;
             mailmodel = new MailModel();
             return View("Mail",mailmodel);
         }
@@ -251,13 +281,15 @@ namespace AegeanThesis.Controllers
         [ValidateAntiForgeryToken]
         public async System.Threading.Tasks.Task<ActionResult> SendMailResult(MailModel mailModel)
         {
+            var user = Helpers.GetCurrentUser(this.User);
+
             //This what a mail will contain
             var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
             var message = new MailMessage();
             message.To.Add(new MailAddress(mailModel.Email)); //replace with valid value
             message.Subject = mailModel.Subject;
-            message.From = (new MailAddress(Startup.curr_mail));
-            message.Body = string.Format(body, "AegeanThesis", Startup.curr_mail, "User " + Startup.curr_user + " is wants approve for thesis " + model.Title,"\n"+mailModel.Message);
+            message.From = (new MailAddress(user.Email));
+            message.Body = string.Format(body, "AegeanThesis", user.Email, "User " + user.Name + " is wants approve for thesis " + "change" + "\n" + mailModel.Message);
             message.IsBodyHtml = true;
             //using the Gmail service used before for user validation
             using (var smtp = new GmailEmailService())

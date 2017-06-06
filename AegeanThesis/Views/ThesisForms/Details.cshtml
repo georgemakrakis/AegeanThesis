@@ -5,139 +5,148 @@
 }
 
 <h2>Details</h2>
-
-<div>
+<div class="row">
     <h4>ThesisForm</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+    <div class="col-md-6">
+        <div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Supervisor)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Supervisor)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Supervisor)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NumStudents)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Supervisor)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.NumStudents)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.NumStudents)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Purpose)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.NumStudents)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Purpose)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Purpose)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Purpose)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PrereqLessons)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PrereqLessons)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.PrereqLessons)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PrereqKnowledge)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PrereqLessons)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PrereqKnowledge)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.PrereqKnowledge)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StudentInfo)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PrereqKnowledge)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.StudentInfo)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.StudentInfo)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AnnouncDate)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.StudentInfo)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.AnnouncDate)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.AnnouncDate)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AdoptionDate)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.AnnouncDate)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.AdoptionDate)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.AdoptionDate)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FinishDate)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.AdoptionDate)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.FinishDate)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.FinishDate)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Grade)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.FinishDate)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Grade)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Grade)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Assigned)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Grade)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Assigned)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Assigned)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Approved)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Assigned)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Approved)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Approved)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ReadyPres)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Approved)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ReadyPres)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ReadyPres)
+                </dt>
 
-    </dl>
+                <dd>
+                    @Html.DisplayFor(model => model.ReadyPres)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+            @Html.ActionLink("Back to List", "Index") |
+            @Html.ActionLink("Export PDF", "Print", new { id = Model.ID }) |
+            @Html.ActionLink("Send Mail", "MailPage", new { id = Model.ID }) 
+        </p>
+    </div>
+    <div class="col-md-6">
+        <div id="chart_div"></div>
+
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index") |
-    @Html.ActionLink("Export PDF", "Print", new { id = Model.ID }) |
-    @Html.ActionLink("Send Mail","MailPage")
-</p>
+
 <div>
     <h2>Chat</h2>
     <div class="container">
@@ -146,15 +155,80 @@
         <input type="hidden" id="displayname" />
         <ul id="discussion"></ul>
     </div>
-    @section scripts {
-        <!--Script references. -->
-        <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
-        <!--Reference the SignalR library. -->
-        <script src="~/Scripts/jquery.signalR-2.2.2.js"></script>
-        <!--Reference the autogenerated SignalR hub script. -->
-        <script src="~/signalr/hubs"></script>
-        <!--SignalR script to update the chat page and send messages.-->
-        <script>
+</div>
+
+
+@section scripts {
+    <!--Script references. -->
+    <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
+    <!--Reference the SignalR library. -->
+    <script src="~/Scripts/jquery.signalR-2.2.2.js"></script>
+    <!--Reference the autogenerated SignalR hub script. -->
+    <script src="~/signalr/hubs"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        function daysToMilliseconds(days) {
+            return days * 24 * 60 * 60 * 1000;
+        }
+        var o;
+        $(function () {
+
+            $.get("../../api/Chart", {ID:@Model.ID })
+            .done(function(data){
+                o=data;
+                google.charts.load('current', {'packages':['gantt']});
+                google.charts.setOnLoadCallback(drawChart);
+            });
+
+        });
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Task ID');
+            data.addColumn('string', 'Task Name');            
+
+            data.addColumn('date', 'Start Date');
+            data.addColumn('date', 'End Date');
+            data.addColumn('number', 'Duration');
+            data.addColumn('number', 'Percent Complete');
+            data.addColumn('string', 'Dependencies');
+
+
+            for (var i=0;i<o.length;i++)
+            {
+                data.addRows(
+                [
+                    [
+                        new Number(o[i].ID), o[i].Name, new Date(o[i].StartDate),new Date(o[i].EndDate), null, o[i].ProgressPercentage, o[i].Dependencies
+                    ]
+                ]);
+            }
+            /*data.addRows(
+            [
+                ['Research', 'Find sources',
+                 new Date(2015, 0, 1), new Date(2015, 0, 5), null,  100,  null],
+                ['Write', 'Write paper',
+                 null, new Date(2015, 0, 9), daysToMilliseconds(3), 25, 'Research,Outline'],
+                ['Cite', 'Create bibliography',
+                 null, new Date(2015, 0, 7), daysToMilliseconds(1), 20, 'Research'],
+                ['Complete', 'Hand in paper',
+                 null, new Date(2015, 0, 10), daysToMilliseconds(1), 0, 'Cite,Write'],
+                ['Outline', 'Outline paper',
+                 null, new Date(2015, 0, 6), daysToMilliseconds(1), 100, 'Research']
+            ]);*/
+
+
+            var options = {
+                height: 275
+            };
+
+            var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+
+            chart.draw(data, options);
+        }
+    </script>
+
+    <!--SignalR script to update the chat page and send messages.-->
+    <script>
             $(function () {
                 // Reference the auto-generated proxy for the hub.
                 var chat = $.connection.chatHub;
@@ -164,8 +238,8 @@
                     $('#discussion').append('<li><strong>' + htmlEncode(name)
                         + '</strong>: ' + htmlEncode(message) + '</li>');
                 };
-                // Get the user name and store it to prepend to messages.               
-                $('#displayname').val('@Startup.curr_user');
+                // Get the user name and store it to prepend to messages.
+                $('#displayname').val('@AegeanThesis.Models.Helpers.GetCurrentUser(this.User).Name');
                 // Set initial focus to message input box.
                 $('#message').focus();
                 // Start the connection.
@@ -183,6 +257,5 @@
                 var encodedValue = $('<div />').text(value).html();
                 return encodedValue;
             }
-        </script>
-    }
-</div>
+    </script>
+}
