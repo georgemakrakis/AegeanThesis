@@ -268,35 +268,40 @@ namespace AegeanThesis.Controllers
 
             //ThesisTitle = db.Thesises.Find(id).Title;
             mailmodel = new MailModel();
-            return View("Mail",mailmodel);
-        }
-
-        /*public ActionResult SendMail()
-        {
-            MailModel model = new MailModel();
-            return View("MailPage",model);
-        }*/
+            mailmodel.ThesisId = id;
+            return View("Mail", mailmodel);
+        }       
         
         [HttpPost, ActionName("SendMailResult")]
         [ValidateAntiForgeryToken]
-        public async System.Threading.Tasks.Task<ActionResult> SendMailResult(MailModel mailModel)
+        public async System.Threading.Tasks.Task<ActionResult> SendMailResult(MailModel mailModel,int? id)
         {
             var user = Helpers.GetCurrentUser(this.User);
-
+            //var id=Url.RequestContext.RouteData.Values["id"];
+            if (id == null || user.Role != "Professor")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ThesisForm thesisForm = db.Thesises.Find(id);
+            if (thesisForm == null)
+            {
+                return HttpNotFound();
+            }            
+            
             //This what a mail will contain
             var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
             var message = new MailMessage();
             message.To.Add(new MailAddress(mailModel.Email)); //replace with valid value
             message.Subject = mailModel.Subject;
             message.From = (new MailAddress(user.Email));
-            message.Body = string.Format(body, "AegeanThesis", user.Email, "User " + user.Name + " is wants approve for thesis " + "change" + "\n" + mailModel.Message);
+            message.Body = string.Format(body, "AegeanThesis", user.Email, "User " + user.Name + " is wants approve for this thesis <a href =\"http://localhost:61006/ThesisForms/Details/"+id+">localhost:61006/ThesisForms/Details/</a>" + "\n" + mailModel.Notes);
             message.IsBodyHtml = true;
             //using the Gmail service used before for user validation
             using (var smtp = new GmailEmailService())
             {
                 await smtp.SendMailAsync(message);
             }
-            return RedirectToAction("InterestedSent");
+            return View("BoardSent");
         }
         protected override void Dispose(bool disposing)
         {

@@ -6,18 +6,12 @@
 }
 
 <h2>Mail</h2>
-@using (Html.BeginForm("SendMailResult", "ThesisForms", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("SendMailResult", "ThesisForms", new { id=Model.ThesisId}, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     <h4>Create a new account.</h4>
     <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-        </div>
-    </div>
+    @Html.ValidationSummary("", new { @class = "text-danger" })    
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
@@ -31,11 +25,11 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Message, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.Notes, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextAreaFor(m => m.Message, new { @class = "form-control" })
+            @Html.TextAreaFor(m => m.Notes, new { @class = "form-control" })
         </div>
-    </div>
+    </div>    
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" class="btn btn-default" value="Send" />
