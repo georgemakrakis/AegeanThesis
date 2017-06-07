@@ -3,9 +3,11 @@ using AegeanThesis.Models;
 using Rotativa;
 using System;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Web;
 using System.Web.Mvc;
 
 namespace AegeanThesis.Controllers
@@ -289,11 +291,11 @@ namespace AegeanThesis.Controllers
         
         [HttpPost, ActionName("SendMailResult")]
         [ValidateAntiForgeryToken]
-        public async System.Threading.Tasks.Task<ActionResult> SendMailResult(MailModel mailModel,int? id)
+        public async System.Threading.Tasks.Task<ActionResult> SendMailResult(MailModel mailModel,int? id, HttpPostedFileBase uploadFile)
         {
             var user = Helpers.GetCurrentUser(this.User);
             //var id=Url.RequestContext.RouteData.Values["id"];
-            if (id == null || user.Role != "Professor")
+            if (id == null || user.Role == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -311,12 +313,26 @@ namespace AegeanThesis.Controllers
             message.From = (new MailAddress(user.Email));
             message.Body = string.Format(body, "AegeanThesis", user.Email, "User " + user.Name + " is wants approve for this thesis <a href =\"http://localhost:61006/ThesisForms/Details/"+id+">localhost:61006/ThesisForms/Details/</a>" + "\n" + mailModel.Notes);
             message.IsBodyHtml = true;
+            if (uploadFile != null)
+            {
+                string fileName = Path.GetFileName(uploadFile.FileName);
+                message.Attachments.Add(new Attachment(uploadFile.InputStream, fileName));
+            }
             //using the Gmail service used before for user validation
             using (var smtp = new GmailEmailService())
             {
                 await smtp.SendMailAsync(message);
             }
-            return View("BoardSent");
+
+            if (user.Role == "Professor")
+            {
+                return View("BoardSent");
+            }
+            else
+            {
+                return View("MailProfessor");
+            }
+            
         }
         protected override void Dispose(bool disposing)
         {

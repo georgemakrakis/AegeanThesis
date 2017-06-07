@@ -8,8 +8,7 @@ namespace AegeanThesis.Models
         [EmailAddress]
         public string Email { get; set; }
         [Required]
-        public string Subject { get; set; }
-        [Required]
+        public string Subject { get; set; }        
         public string Notes { get; set; }
 
         public int? ThesisId { get; set; }
