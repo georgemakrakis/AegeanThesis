@@ -17,9 +17,24 @@ namespace AegeanThesis.Controllers
         private MailModel mailmodel;
 
         // GET: ThesisForms
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(db.Thesises.ToList());
+            var thesises = from m in db.Thesises
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                thesises = thesises.Where(s => s.Title.Contains(searchString));
+            }
+
+            return View(thesises);
+
+            //return View(db.Thesises.ToList());
+        }
+        [HttpPost]
+        public string Index(FormCollection fc, string searchString)
+        {
+            return "<h3> From [HttpPost]Index: " + searchString + "</h3>";
         }
 
         // GET: ThesisForms/Details/5

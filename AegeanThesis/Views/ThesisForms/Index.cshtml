@@ -8,75 +8,84 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Supervisor)
-        </th>        
-        <th>
-            @Html.DisplayNameFor(model => model.Purpose)
-        </th>        
-        <th>
-            @Html.DisplayNameFor(model => model.StudentInfo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AnnouncDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AdoptionDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FinishDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Grade)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Assigned)
-        </th>
-        <th></th>
-    </tr>
+    @using (Html.BeginForm("Index", "ThesisForms", FormMethod.Get))
+    {
+    <p>
+        Title: @Html.TextBox("SearchString", null, new { @class = "form-control" }) <br />
+        <input type="submit" value="Filter" class="btn btn-default" />
+    </p>
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Supervisor)
-        </td>        
-        <td>
-            @Html.DisplayFor(modelItem => item.Purpose)
-        </td>        
-        <td>
-            @Html.DisplayFor(modelItem => item.StudentInfo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AnnouncDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AdoptionDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FinishDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Grade)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Assigned)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID }) |
-            @Html.ActionLink("Interested", "Interested", new { id = item.ID })
-        </td>
-    </tr>
-}
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supervisor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Purpose)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentInfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnnouncDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdoptionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FinishDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Assigned)
+            </th>
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Supervisor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Purpose)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentInfo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnnouncDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdoptionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FinishDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Assigned)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }) |
+                    @Html.ActionLink("Interested", "Interested", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
