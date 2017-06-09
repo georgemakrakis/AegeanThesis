@@ -22,7 +22,7 @@ namespace AegeanThesis.Controllers
         public ActionResult Index(string searchString)
         {
             var thesises = from m in db.Thesises
-                         select m;
+                           select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -70,6 +70,14 @@ namespace AegeanThesis.Controllers
                             {
                         new SelectListItem { Value = "Structed Programming", Text = "Structed Programming" },
                         new SelectListItem { Value = "Object Oriented Programming", Text = "Object Oriented Programming" },
+                        new SelectListItem { Value = "English 1", Text = "English 1" },
+                        new SelectListItem { Value = "Physics", Text = "Physics" },
+                        new SelectListItem { Value = "Algebra", Text = "Algebra" },
+                        new SelectListItem { Value = "Data Stractures", Text = "Data Stractures" },
+                        new SelectListItem { Value = "Networks", Text = "Networks" },
+                        new SelectListItem { Value = "Databases 2", Text = "Databases 2" },
+                        new SelectListItem { Value = "Software Engineering", Text = "Software Engineering" },
+                        new SelectListItem { Value = "Distributed Systems", Text = "Distributed Systems" }
                     }, "Value", "Text"),
                     //This assignment is used to pass logged in user into DB
                     Supervisor = user.Name,
@@ -138,6 +146,14 @@ namespace AegeanThesis.Controllers
                 {
                         new SelectListItem { Value = "Structed Programming", Text = "Structed Programming" },
                         new SelectListItem { Value = "Object Oriented Programming", Text = "Object Oriented Programming" },
+                        new SelectListItem { Value = "English 1", Text = "English 1" },
+                        new SelectListItem { Value = "Physics", Text = "Physics" },
+                        new SelectListItem { Value = "Algebra", Text = "Algebra" },
+                        new SelectListItem { Value = "Data Stractures", Text = "Data Stractures" },
+                        new SelectListItem { Value = "Networks", Text = "Networks" },
+                        new SelectListItem { Value = "Databases 2", Text = "Databases 2" },
+                        new SelectListItem { Value = "Software Engineering", Text = "Software Engineering" },
+                        new SelectListItem { Value = "Distributed Systems", Text = "Distributed Systems" }
                     }, "Value", "Text"),
                 //This assignment is used to pass logged in user into DB
                 Supervisor = user.Name
@@ -160,8 +176,16 @@ namespace AegeanThesis.Controllers
             {
                 Items = new SelectList(new[]
                 {
-                        new SelectListItem { Value = "Structed Programming", Text = "Structed Programming" },
+                       new SelectListItem { Value = "Structed Programming", Text = "Structed Programming" },
                         new SelectListItem { Value = "Object Oriented Programming", Text = "Object Oriented Programming" },
+                        new SelectListItem { Value = "English 1", Text = "English 1" },
+                        new SelectListItem { Value = "Physics", Text = "Physics" },
+                        new SelectListItem { Value = "Algebra", Text = "Algebra" },
+                        new SelectListItem { Value = "Data Stractures", Text = "Data Stractures" },
+                        new SelectListItem { Value = "Networks", Text = "Networks" },
+                        new SelectListItem { Value = "Databases 2", Text = "Databases 2" },
+                        new SelectListItem { Value = "Software Engineering", Text = "Software Engineering" },
+                        new SelectListItem { Value = "Distributed Systems", Text = "Distributed Systems" }
                 }, "Value", "Text"),
                 //This assignment is used to pass logged in user into DB
                 Supervisor = user.Name
@@ -221,15 +245,15 @@ namespace AegeanThesis.Controllers
                 //This what a mail will contain
                 var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
                 var message = new MailMessage();
-                message.To.Add(new MailAddress(thesisForm.Supervisor+"@aegean.gr")); //replace with valid value
+                message.To.Add(new MailAddress(thesisForm.Supervisor + "@aegean.gr")); //replace with valid value
                 message.Subject = "Your email subject";
-                message.From=(new MailAddress("georgemakrakis88@gmail.com"));
+                message.From = (new MailAddress("georgemakrakis88@gmail.com"));
                 message.Body = string.Format(body, "AegeanThesis", "georgemakrakis88@gmail.com", "User " + user.Email + " is interested about thesis " + thesisForm.Title);
                 message.IsBodyHtml = true;
                 //using the Gmail service used before for user validation
                 using (var smtp = new GmailEmailService())
-                {                               
-                    await smtp.SendMailAsync(message);                    
+                {
+                    await smtp.SendMailAsync(message);
                 }
                 return RedirectToAction("InterestedSent");
             }
@@ -255,7 +279,7 @@ namespace AegeanThesis.Controllers
         [HttpPost, ActionName("Interested")]
         [ValidateAntiForgeryToken]
         public ActionResult Interested(int id)
-        {            
+        {
             return RedirectToAction("ThesisForm");
         }
         public ActionResult Print(int? id)
@@ -287,11 +311,11 @@ namespace AegeanThesis.Controllers
             mailmodel = new MailModel();
             mailmodel.ThesisId = id;
             return View("Mail", mailmodel);
-        }       
-        
+        }
+
         [HttpPost, ActionName("SendMailResult")]
         [ValidateAntiForgeryToken]
-        public async System.Threading.Tasks.Task<ActionResult> SendMailResult(MailModel mailModel,int? id, HttpPostedFileBase uploadFile)
+        public async System.Threading.Tasks.Task<ActionResult> SendMailResult(MailModel mailModel, int? id, HttpPostedFileBase uploadFile)
         {
             var user = Helpers.GetCurrentUser(this.User);
             //var id=Url.RequestContext.RouteData.Values["id"];
@@ -303,8 +327,8 @@ namespace AegeanThesis.Controllers
             if (thesisForm == null)
             {
                 return HttpNotFound();
-            }            
-            
+            }
+
             //This what a mail will contain
             var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
             var message = new MailMessage();
@@ -320,7 +344,7 @@ namespace AegeanThesis.Controllers
             {
                 message.Body = string.Format(body, "AegeanThesis", user.Email, mailModel.Notes);
             }
-            
+
             message.IsBodyHtml = true;
             if (uploadFile != null)
             {
@@ -341,7 +365,7 @@ namespace AegeanThesis.Controllers
             {
                 return View("MailProfessor");
             }
-            
+
         }
         protected override void Dispose(bool disposing)
         {
