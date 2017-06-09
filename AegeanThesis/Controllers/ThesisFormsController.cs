@@ -311,7 +311,16 @@ namespace AegeanThesis.Controllers
             message.To.Add(new MailAddress(mailModel.Email)); //replace with valid value
             message.Subject = mailModel.Subject;
             message.From = (new MailAddress(user.Email));
-            message.Body = string.Format(body, "AegeanThesis", user.Email, "User " + user.Name + " is wants approve for this thesis <a href =\"http://localhost:61006/ThesisForms/Details/"+id+">localhost:61006/ThesisForms/Details/</a>" + "\n" + mailModel.Notes);
+            //sending the Professor's mail
+            if (user.Role == "Professor")
+            {
+                message.Body = string.Format(body, "AegeanThesis", user.Email, "User " + user.Name + " is wants approve for this thesis <a href =\"http://localhost:61006/ThesisForms/Details/" + id + ">localhost:61006/ThesisForms/Details/</a>" + "\n" + mailModel.Notes);
+            }
+            else //ortherwise the user is Student so we send his mail
+            {
+                message.Body = string.Format(body, "AegeanThesis", user.Email, mailModel.Notes);
+            }
+            
             message.IsBodyHtml = true;
             if (uploadFile != null)
             {
@@ -323,7 +332,7 @@ namespace AegeanThesis.Controllers
             {
                 await smtp.SendMailAsync(message);
             }
-
+            //Showing each page respectively
             if (user.Role == "Professor")
             {
                 return View("BoardSent");
