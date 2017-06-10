@@ -282,6 +282,7 @@ namespace AegeanThesis.Controllers
         {
             return RedirectToAction("ThesisForm");
         }
+
         public ActionResult Print(int? id)
         {
             var user = Helpers.GetCurrentUser(this.User);
@@ -295,7 +296,9 @@ namespace AegeanThesis.Controllers
             {
                 return HttpNotFound();
             }
-            return new ActionAsPdf("Details", thesisForm);
+            //Tried to tdo this to pring also Gantt chart but it didnt work
+            //return new ActionAsPdf("Details", thesisForm);            
+            return new ViewAsPdf("Details", thesisForm);
         }
 
         public ActionResult MailPage(int? id)

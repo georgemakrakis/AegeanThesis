@@ -6,7 +6,7 @@ namespace AegeanThesis.Models
 {
     public class ThesisForm
     {
-        [Key]
+        
         public int ID { get; set; }
         public string Title { get; set; }
         public string Supervisor{ get; set; }//Taken from - connected with: User model attribute Name
